@@ -1,0 +1,81 @@
+{
+  "path": "./src/docs",
+  "name": "docs",
+  "children": [
+    {
+      "path": "src/docs/01-הקדמה",
+      "name": "01-הקדמה",
+      "children": [
+        {
+          "path": "src/docs/01-הקדמה/1-פתיחה.md",
+          "name": "1-פתיחה.md",
+          "size": 5392,
+          "extension": ".md",
+          "type": "file"
+        }
+      ],
+      "size": 5392,
+      "type": "directory"
+    },
+    {
+      "path": "src/docs/02-על משתנים",
+      "name": "02-על משתנים",
+      "children": [
+        {
+          "path": "src/docs/02-על משתנים/1-משתנים בסיסיים.md",
+          "name": "1-משתנים בסיסיים.md",
+          "size": 1308,
+          "extension": ".md",
+          "type": "file"
+        },
+        {
+          "path": "src/docs/02-על משתנים/2-הדפסת משתנים.md",
+          "name": "2-הדפסת משתנים.md",
+          "size": 1308,
+          "extension": ".md",
+          "type": "file"
+        },
+        {
+          "path": "src/docs/02-על משתנים/3-משתנים שאלות מתקדמות.md",
+          "name": "3-משתנים שאלות מתקדמות.md",
+          "size": 1563,
+          "extension": ".md",
+          "type": "file"
+        }
+      ],
+      "size": 4179,
+      "type": "directory"
+    },
+    {
+      "path": "src/docs/03-משתנה-טקסט",
+      "name": "03-משתנה-טקסט",
+      "children": [
+        {
+          "path": "src/docs/03-משתנה-טקסט/1-בסיס.md",
+          "name": "1-בסיס.md",
+          "size": 1249,
+          "extension": ".md",
+          "type": "file"
+        },
+        {
+          "path": "src/docs/03-משתנה-טקסט/2-תכונות מיוחדות.md",
+          "name": "2-תכונות מיוחדות.md",
+          "size": 926,
+          "extension": ".md",
+          "type": "file"
+        },
+        {
+          "path": "src/docs/03-משתנה-טקסט/3-שאלות מתקדמות.md",
+          "name": "3-שאלות מתקדמות.md",
+          "size": 1223,
+          "extension": ".md",
+          "type": "file"
+        }
+      ],
+      "size": 3398,
+      "type": "directory"
+    }
+  ],
+  "size": 12969,
+  "type": "directory"
+}
