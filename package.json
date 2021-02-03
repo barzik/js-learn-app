@@ -1,0 +1,85 @@
+{
+  "name": "js-learn-app",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://hebdevbook.com/learnjs",
+  "dependencies": {
+    "@material-ui/core": "^4.9.8",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "cypress": "^6.3.0",
+    "directory-tree": "^2.2.4",
+    "install": "^0.13.0",
+    "jss-rtl": "^0.3.0",
+    "npm": "^6.14.11",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-markdown": "^5.0.3",
+    "react-scripts": "^4.0.1",
+    "react-syntax-highlighter": "^15.4.3"
+  },
+  "scripts": {
+    "start": "npm run build-md-json && react-scripts start",
+    "build": "npm run build-md-json && react-scripts build",
+    "test": "npm run build-md-json && react-scripts test",
+    "build-md-json": "node ./build-md-json",
+    "lint": "npx eslint ./src/**/*.{js,jsx,jon}",
+    "lint:fix": "npx eslint ./src/**/*.{js,jsx} --fix",
+    "coverage": "npm t -- --coverage --watchAll",
+    "coverage:ci": "npm t -- --coverage",
+    "cypress": "cypress open",
+    "cypress:ci": "cypress run",
+    "e2e": "start-server-and-test start http://localhost:3000 cypress:ci"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,json}": "npm run lint:fix"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/",
+      "!src/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 70,
+        "lines": 88,
+        "statements": 85
+      }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-syntax-highlighte)"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
+    "start-server-and-test": "^1.11.7"
+  }
+}
