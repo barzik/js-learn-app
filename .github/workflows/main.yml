@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-
+      - master
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -43,4 +43,4 @@ jobs:
           start: npm start
         env:
           # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
