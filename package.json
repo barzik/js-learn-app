@@ -31,7 +31,9 @@
     "coverage:ci": "npm t -- --coverage",
     "cypress": "cypress open",
     "cypress:ci": "cypress run",
-    "e2e": "start-server-and-test start http://localhost:3000 cypress:ci"
+    "e2e": "start-server-and-test start http://localhost:3000 cypress:ci",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -71,11 +73,6 @@
     "coverageReporters": [
       "text"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "devDependencies": {
     "husky": "^6.0.0",
