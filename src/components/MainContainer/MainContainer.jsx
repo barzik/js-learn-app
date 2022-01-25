@@ -8,7 +8,7 @@ import CodeBlock from './../CodeBlock';
 function MainContainer () {
   const classes = useStyles();
   return (
-    <Container data-cy="main-container" maxWidth="lg" className={classes.container}>
+    <Container data-cy="main-container" maxWidth="lg" className={classes.container} style={{overflowX:"hidden"}}>
         <MdContextConsumer>
         {context => (
             <ReactMarkdown className={classes.markdown} escapeHtml={false} renderers={{ code: CodeBlock }}>{context.md}</ReactMarkdown>
