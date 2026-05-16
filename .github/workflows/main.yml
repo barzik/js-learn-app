@@ -8,51 +8,31 @@ on:
     branches:
       - main
       - master
+
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    name: Build & Test (Node ${{ matrix.node_version }})
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-        node_version:
-          - 14
-        architecture:
-          - x64
-    name: JS Learn App ${{ matrix.node_version }} - ${{ matrix.architecture }} on ${{ matrix.os }}
+        node_version: [22]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Get npm cache directory path
-        id: npm-cache-dir-path
-        run: echo "::set-output name=dir::$(npm config get cache)"
-
-      - uses: actions/cache@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          node-version: ${{ matrix.node_version }}
+          cache: npm
 
       - name: Install dependencies
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
-          architecture: ${{ matrix.architecture }}
-      - run: npm ci
-      - name: Test and Coverage
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
-          architecture: ${{ matrix.architecture }}
-      - run: npm run coverage:ci
-      - name: E2E Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          browser: chrome
-          record: true
-          parallel: true
-          start: npm start
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests with coverage
+        run: npm run test:ci
+
+      - name: Build
+        run: npm run build

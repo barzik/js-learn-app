@@ -1,15 +1,15 @@
-import React from 'react'
-import List from '@material-ui/core/List'
 import MainItem from '../MainItem';
 
-function SidebarMenu (props) {
+function SidebarMenu({ mdList }) {
   return (
-    <List data-cy="nav-list">
-      {props.mdList.map((item, index) => (
-        <MainItem key={index} mainItem={item} />
-      ))}
-    </List>
-  )
+    <nav data-cy="nav-list" className="py-2">
+      <ul className="flex flex-col">
+        {mdList.map((item, index) => (
+          <MainItem key={item.path || index} mainItem={item} />
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
 export default SidebarMenu;
