@@ -34,6 +34,10 @@ Runs the app in development mode on [http://localhost:3000](http://localhost:300
 
 Runs the unit test suite with Vitest in watch mode. Use `npm run test:ci` for a single-run with coverage.
 
+### `npm run e2e`
+
+Runs the Playwright end-to-end suite against a temporary dev server seeded with deterministic content from `e2e/fixtures/docs/`. The Playwright `webServer` config starts the app on port 3001, copies fixtures into `src/docs/`, and runs the suite headlessly. After the run an HTML report is available at `playwright-report/`.
+
 ### `npm run build`
 
 Builds the app for production to the `dist` folder. The bundle is minified and ready to deploy to any static host.
