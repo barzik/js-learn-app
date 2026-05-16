@@ -5,7 +5,14 @@ import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', 'src/docs/**', 'coverage/**'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      'src/docs/**',
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**',
+    ],
   },
   js.configs.recommended,
   {
@@ -36,7 +43,15 @@ export default [
     },
   },
   {
-    files: ['src/**/*.spec.{js,jsx}', 'src/setupTests.js', 'build-md-json.js', 'pull-md.js'],
+    files: [
+      'src/**/*.spec.{js,jsx}',
+      'src/setupTests.js',
+      'build-md-json.js',
+      'pull-md.js',
+      'e2e/**/*.js',
+      'playwright.config.js',
+      'vite.config.js',
+    ],
     languageOptions: {
       globals: {
         ...globals.browser,
