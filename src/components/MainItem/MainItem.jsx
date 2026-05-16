@@ -1,40 +1,52 @@
-import React from 'react';
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { useState } from 'react';
 import MdItem from '../MdItem';
 import HebrewName from '../HebrewName';
 
-function MainItem (props) {
-  const [open, setOpen] = React.useState(false);
+function ChevronIcon({ open }) {
+  return (
+    <svg
+      className={`h-4 w-4 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        fillRule="evenodd"
+        d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
 
-  function handleClick() {
-    setOpen(!open);
-  }
-
-  const mainItemName = <HebrewName name={props.mainItem.name} />;
-  const items = props.mainItem.children || [];
+function MainItem({ mainItem }) {
+  const [open, setOpen] = useState(false);
+  const items = mainItem.children || [];
 
   return (
-    <React.Fragment>
-      <ListItem data-cy="list-item" button divider onClick={handleClick}>
-        <ListItemText primary={mainItemName} />
-          {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open} data-cy={`open-item-${open}`} >
-        <List dense disablePadding>
+    <li className="border-b border-gray-200">
+      <button
+        type="button"
+        data-cy="list-item"
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex w-full items-center justify-between gap-2 px-4 py-3 text-right text-sm font-medium hover:bg-gray-100"
+      >
+        <span>
+          <HebrewName name={mainItem.name} />
+        </span>
+        <ChevronIcon open={open} />
+      </button>
+      {open && (
+        <ul data-cy={`open-item-${open}`} className="bg-white">
           {items.map((item, index) => (
-              <ListItem data-cy="sub-item" button key={index}  >
-                <MdItem item={item} />
-              </ListItem>
-            ))}
-        </List>
-      </Collapse>
-    </React.Fragment>
-  )
+            <li key={item.path || index} data-cy="sub-item">
+              <MdItem item={item} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  );
 }
 
 export default MainItem;

@@ -1,28 +1,18 @@
-import React from 'react';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles'
-import { MdContextConsumer } from './../../contexts/MdContextProvider';
+import { useMdContext } from '../../contexts/MdContextProvider';
 import HebrewName from '../HebrewName';
 
-function MdItem (props) {
-  const item = props.item;
-  const name = item.name;
-  const classes = useStyles();
+function MdItem({ item }) {
+  const { loadMd } = useMdContext();
 
   return (
-    <MdContextConsumer>
-    {context => (
-        <ListItemText className={classes.subMenu} onClick={() => {context.loadMd(item)}} primary={<HebrewName name={name} />} />
-    )}
-    </MdContextConsumer>
-
-  )
+    <button
+      type="button"
+      onClick={() => loadMd(item)}
+      className="block w-full cursor-pointer px-6 py-2 text-right text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+    >
+      <HebrewName name={item.name} />
+    </button>
+  );
 }
-
-const useStyles = makeStyles(theme => ({
-  subMenu: {
-    cursor: 'pointer',
-  },
-}));
 
 export default MdItem;

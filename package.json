@@ -1,82 +1,52 @@
 {
   "name": "js-learn-app",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "homepage": "https://hebdevbook.com/learnjs",
-  "dependencies": {
-    "@material-ui/core": "^4.11.3",
-    "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^13.1.1",
-    "cypress": "^6.8.0",
-    "directory-tree": "^2.2.7",
-    "install": "^0.13.0",
-    "jss-rtl": "^0.3.0",
-    "npm": "^7.7.6",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-markdown": "^5.0.3",
-    "react-scripts": "^4.0.3",
-    "react-syntax-highlighter": "^15.4.3"
-  },
   "scripts": {
-    "start": "npm run build-md-json && react-scripts start",
-    "build": "npm run build-md-json && react-scripts build",
-    "test": "npm run build-md-json && react-scripts test",
-    "build-md-json": "node ./build-md-json",
-    "lint": "npx eslint ./src/**/*.{js,jsx,jon}",
-    "lint:fix": "npx eslint ./src/**/*.{js,jsx} --fix",
-    "coverage": "npm t -- --coverage --watchAll",
-    "coverage:ci": "npm t -- --coverage",
-    "cypress": "cypress open",
-    "cypress:ci": "cypress run",
-    "e2e": "start-server-and-test start http://localhost:3000 cypress:ci",
+    "dev": "npm run build-md-json && vite",
+    "build": "npm run build-md-json && vite build",
+    "build:wp": "npm run build-md-json && vite build --mode singlefile",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
+    "build-md-json": "node ./build-md-json.js",
+    "pull-md": "node ./pull-md.js",
     "pre-commit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "lint-staged": {
-    "./src/**/*.{js,jsx,json}": "npm run lint:fix"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!src/index.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 70,
-        "lines": 88,
-        "statements": 85
-      }
-    },
-    "transformIgnorePatterns": [
-      "node_modules/?!(react-syntax-highlighte)"
-    ],
-    "coverageReporters": [
-      "text"
-    ]
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^9.0.3",
+    "react-syntax-highlighter": "^15.6.1",
+    "rehype-raw": "^7.0.0"
   },
   "devDependencies": {
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.3",
-    "start-server-and-test": "^1.11.7"
+    "@eslint/js": "^9.17.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^2.1.8",
+    "directory-tree": "^3.5.2",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "jsdom": "^25.0.1",
+    "lint-staged": "^15.3.0",
+    "tailwindcss": "^4.0.0",
+    "vite": "^6.0.7",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vitest": "^2.1.8"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": "eslint --fix"
   }
 }

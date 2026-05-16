@@ -9,7 +9,11 @@
 /coverage
 
 # production
+/dist
 /build
+
+# vite
+.vite/
 
 # misc
 .DS_Store
@@ -24,7 +28,6 @@ yarn-error.log*
 
 .eslintcache
 
-/cypress/videos
-
-/src/docs
-src/docs/md.json
+# markdown content - pulled in via `npm run pull-md`
+/src/docs/*
+!/src/docs/.gitkeep

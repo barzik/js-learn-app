@@ -1,29 +1,24 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { MdContextConsumer } from '../../contexts/MdContextProvider';
 import ReactMarkdown from 'react-markdown';
-import CodeBlock from './../CodeBlock';
+import rehypeRaw from 'rehype-raw';
+import CodeBlock from '../CodeBlock';
+import { useMdContext } from '../../contexts/MdContextProvider';
 
-function MainContainer () {
-  const classes = useStyles();
+function MainContainer() {
+  const { md } = useMdContext();
+
   return (
-    <Container data-cy="main-container" maxWidth="lg" className={classes.container} style={{overflowX:"hidden"}}>
-        <MdContextConsumer>
-        {context => (
-            <ReactMarkdown className={classes.markdown} escapeHtml={false} renderers={{ code: CodeBlock }}>{context.md}</ReactMarkdown>
-        ) }
-        </MdContextConsumer>
-    </Container>
-  )
-};
+    <section
+      data-cy="main-container"
+      className="markdown flex-1 overflow-auto px-8 py-6"
+    >
+      <ReactMarkdown
+        rehypePlugins={[rehypeRaw]}
+        components={{ code: CodeBlock }}
+      >
+        {md}
+      </ReactMarkdown>
+    </section>
+  );
+}
 
-const useStyles = makeStyles(theme => ({
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
-      overflow: 'scroll',
-    },
-  }))
-
-  export default MainContainer;
+export default MainContainer;

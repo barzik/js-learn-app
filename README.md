@@ -1,44 +1,61 @@
-Site for displaying markdown files, with code examples and in RTL.
+# js-learn-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Hebrew RTL site for displaying markdown lessons with syntax-highlighted code examples.
 
-## Install & Usage 
+Built with **Vite + React 19 + Tailwind CSS v4**. Markdown content is loaded from `src/docs/**/*.md` at build time via `import.meta.glob`.
 
-`npm ci` to install. Use the following scripts to run, test, and build. The bundled build can be placed on every server, even on WordPress.
+## Install
 
-Place all markdown files in directories inside src/docs. See the example data for information on structure. In order to pull a GitHub repository to that location, please run `pull-md.js` with an environment variable: JS_LEARN_APP: git@github.com:your-md-repo-location
-for example:
-`JS_LEARN_APP="git@github.com:barzik/js-learn-heb-md.git" node pull-md.js`
+```bash
+npm ci
+```
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+Place all markdown files in directories inside `src/docs`. The directory structure becomes the sidebar navigation.
 
-### `npm start`
+To pull a GitHub repository (or copy from a local path) into `src/docs`, set `MD_REPO_URL` and run:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+MD_REPO_URL="git@github.com:barzik/js-learn-heb-md.git" npm run pull-md
+# or with a local path:
+MD_REPO_URL="/path/to/js-learn-heb-md" npm run pull-md
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+`pull-md` cleans `src/docs` (except `md.json` and `.gitkeep`) before copying/cloning, so there's no need to delete anything manually.
 
-### `npm run coverage`
-Runs the coverage tests and the tests.
+## Available scripts
 
-### `npm run e2e`
+### `npm run dev`
 
-Launches the e2e coverage (with the server, if not already started).
+Runs the app in development mode on [http://localhost:3000](http://localhost:3000). The page hot-reloads on edits.
+
+### `npm test`
+
+Runs the unit test suite with Vitest in watch mode. Use `npm run test:ci` for a single-run with coverage.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `dist` folder. The bundle is minified and ready to deploy to any static host.
 
-The build is minified, and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### `npm run build:wp`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds a **single self-contained** `dist/index.html` with all JS, CSS, and markdown content inlined. Useful for embedding the whole app into a CMS page (e.g. a WordPress post) where you can only paste a single HTML blob.
+
+Notes when embedding:
+
+- The output file is large (~1.5 MB raw, ~450 KB gzipped). Some hosts limit the size of post content.
+- Disable any JS/CSS minification or "optimization" plugins on the page (e.g. WP Rocket, Autoptimize, W3 Total Cache) for that post — they can corrupt the inline scripts.
+- The build uses `base: './'` so it works no matter where the file is served from.
+
+### `npm run preview`
+
+Locally previews the production build.
 
 ### `npm run build-md-json`
 
-Builds the JSON file that contains the structure of the markdown files in the docs directory. It runs automatically with `start,` `test,` and `build.`
+Rebuilds `src/docs/md.json`, the structure index of the markdown files. Runs automatically before `dev` and `build`.
+
+### `npm run lint` / `npm run lint:fix`
+
+Runs ESLint over `src/**/*.{js,jsx}`.
